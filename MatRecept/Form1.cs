@@ -25,6 +25,14 @@ namespace MatRecept
         private void PopulateComboBox()
         {
             comboBoxRecipe.Items.Clear();
+
+
+        private void PopulateComboBox()
+        {
+            comboBoxRecipe.Items.Clear();
+
+
+
             comboBoxRecipe.Items.Add("Meat");
             comboBoxRecipe.Items.Add("Fish");
             comboBoxRecipe.Items.Add("Soup");
@@ -129,6 +137,7 @@ namespace MatRecept
             loginForum.ShowDialog();
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
         }
@@ -145,6 +154,31 @@ namespace MatRecept
         public class RecipeCollection
         {
             public List<Recipe> Recipes { get; set; }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+
         }
     }
 }
