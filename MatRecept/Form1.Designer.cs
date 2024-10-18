@@ -47,7 +47,6 @@
             listBoxRecipe.Name = "listBoxRecipe";
             listBoxRecipe.Size = new Size(287, 139);
             listBoxRecipe.TabIndex = 0;
-            listBoxRecipe.SelectedIndexChanged += listBoxMeat_SelectedIndexChanged;
             // 
             // buttonAdmin
             // 
@@ -68,7 +67,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(180, 23);
             textBox1.TabIndex = 11;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // buttonSearch
             // 
