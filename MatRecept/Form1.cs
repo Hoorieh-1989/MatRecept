@@ -3,17 +3,31 @@ namespace MatRecept
     public partial class Form1 : Form
     {
 
-
         public Form1()
         {
             InitializeComponent();
-
 
             buttonCreate.Visible = false;
             buttonEdit.Visible = false;
             buttonRemove.Visible = false;
 
+       
+            PopulateComboBox();
+        }
 
+     
+        private void PopulateComboBox()
+        {
+            comboBoxRecipe.Items.Clear();
+
+      
+            comboBoxRecipe.Items.Add("Meat");
+            comboBoxRecipe.Items.Add("Fish");
+            comboBoxRecipe.Items.Add("Soup");
+            comboBoxRecipe.Items.Add("Salad");
+            comboBoxRecipe.Items.Add("Dessert");
+
+            comboBoxRecipe.SelectedIndex = 0;
         }
 
         public void ShowAdminButtons()
@@ -29,9 +43,7 @@ namespace MatRecept
             loginForum.ShowDialog();
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
-        {
-          
-        }
+
+        
     }
 }
