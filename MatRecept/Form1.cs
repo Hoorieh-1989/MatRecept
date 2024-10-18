@@ -2,7 +2,7 @@ namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        
+
 
         public Form1()
         {
@@ -29,5 +29,9 @@ namespace MatRecept
             loginForum.ShowDialog();
         }
 
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+          
+        }
     }
 }
