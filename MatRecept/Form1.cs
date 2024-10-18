@@ -25,14 +25,6 @@ namespace MatRecept
         private void PopulateComboBox()
         {
             comboBoxRecipe.Items.Clear();
-
-
-        private void PopulateComboBox()
-        {
-            comboBoxRecipe.Items.Clear();
-
-
-
             comboBoxRecipe.Items.Add("Meat");
             comboBoxRecipe.Items.Add("Fish");
             comboBoxRecipe.Items.Add("Soup");
@@ -99,7 +91,7 @@ namespace MatRecept
 
             listBoxRecipe.DataSource = null; // Clear previous data
             listBoxRecipe.DataSource = filteredRecipes; // Bind new filtered recipes
-            listBoxRecipe.DisplayMember = "Name";
+            listBoxRecipe.DisplayMember = "Name"; // Display the "Name" property of each recipe
         }
 
         private void comboBoxRecipe_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,7 +129,6 @@ namespace MatRecept
             loginForum.ShowDialog();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
         }
@@ -154,31 +145,6 @@ namespace MatRecept
         public class RecipeCollection
         {
             public List<Recipe> Recipes { get; set; }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-
         }
     }
 }

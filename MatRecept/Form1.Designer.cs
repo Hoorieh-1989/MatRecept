@@ -65,7 +65,7 @@
             buttonAdmin.TabIndex = 10;
             buttonAdmin.Text = "Admin";
             buttonAdmin.UseVisualStyleBackColor = false;
-            buttonAdmin.Click += buttonAdmin_Click;
+           buttonAdmin.Click += buttonAdmin_Click;
             // 
             // textBoxSearch
             // 
@@ -174,7 +174,7 @@
             label1.Size = new Size(49, 20);
             label1.TabIndex = 22;
             label1.Text = "Name";
-            label1.Click += label1_Click;
+          //  label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -184,7 +184,7 @@
             label2.Size = new Size(85, 20);
             label2.TabIndex = 23;
             label2.Text = "Description";
-            label2.Click += label2_Click;
+          //  label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -194,7 +194,7 @@
             label3.Size = new Size(79, 20);
             label3.TabIndex = 24;
             label3.Text = "Ingridients";
-            label3.Click += label3_Click;
+           // label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -204,7 +204,7 @@
             label4.Size = new Size(78, 20);
             label4.TabIndex = 25;
             label4.Text = "Instruction";
-            label4.Click += label4_Click;
+          //  label4.Click += label4_Click;
             // 
             // label5
             // 
@@ -239,7 +239,7 @@
             Controls.Add(listBoxRecipe);
             Name = "Form1";
             Text = "Form1";
-            Load += Form1_Load;
+           // Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
