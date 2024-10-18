@@ -89,7 +89,7 @@
             buttonEdit.TabIndex = 13;
             buttonEdit.Text = "Edit";
             buttonEdit.UseVisualStyleBackColor = false;
-            buttonEdit.Click += buttonEdit_Click;
+            //buttonEdit.Click += buttonEdit_Click;
             // 
             // buttonCreate
             // 
@@ -101,7 +101,7 @@
             buttonCreate.TabIndex = 14;
             buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = false;
-            buttonCreate.Click += buttonCreate_Click;
+           // buttonCreate.Click += buttonCreate_Click;
             // 
             // buttonRemove
             // 
@@ -113,7 +113,7 @@
             buttonRemove.TabIndex = 15;
             buttonRemove.Text = "Remove";
             buttonRemove.UseVisualStyleBackColor = false;
-            buttonRemove.Click += buttonRemove_Click;
+           // buttonRemove.Click += buttonRemove_Click;
             // 
             // comboBoxRecipe
             // 
