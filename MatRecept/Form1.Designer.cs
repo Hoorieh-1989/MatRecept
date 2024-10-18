@@ -30,12 +30,17 @@
         {
             listBoxRecipe = new ListBox();
             buttonAdmin = new Button();
-            textBox1 = new TextBox();
+            textBoxSearch = new TextBox();
             buttonSearch = new Button();
             buttonEdit = new Button();
             buttonCreate = new Button();
             buttonRemove = new Button();
             comboBoxRecipe = new ComboBox();
+            textBoxName = new TextBox();
+            textBoxDescription = new TextBox();
+            textBoxIngredients = new TextBox();
+            textBoxInstructions = new TextBox();
+            comboType = new ComboBox();
             SuspendLayout();
             // 
             // listBoxRecipe
@@ -60,13 +65,13 @@
             buttonAdmin.UseVisualStyleBackColor = false;
             buttonAdmin.Click += buttonAdmin_Click;
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            textBox1.Location = new Point(120, 247);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(180, 23);
-            textBox1.TabIndex = 11;
+            textBoxSearch.Location = new Point(120, 247);
+            textBoxSearch.Margin = new Padding(3, 2, 3, 2);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(180, 23);
+            textBoxSearch.TabIndex = 11;
             // 
             // buttonSearch
             // 
@@ -78,30 +83,29 @@
             buttonSearch.TabIndex = 12;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = false;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // buttonEdit
             // 
             buttonEdit.BackColor = Color.LemonChiffon;
-            buttonEdit.Location = new Point(10, 282);
+            buttonEdit.Location = new Point(134, 282);
             buttonEdit.Margin = new Padding(3, 2, 3, 2);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(98, 20);
             buttonEdit.TabIndex = 13;
             buttonEdit.Text = "Edit";
             buttonEdit.UseVisualStyleBackColor = false;
-            //buttonEdit.Click += buttonEdit_Click;
             // 
             // buttonCreate
             // 
             buttonCreate.BackColor = Color.LightCyan;
-            buttonCreate.Location = new Point(143, 282);
+            buttonCreate.Location = new Point(12, 282);
             buttonCreate.Margin = new Padding(3, 2, 3, 2);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(98, 20);
             buttonCreate.TabIndex = 14;
             buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = false;
-           // buttonCreate.Click += buttonCreate_Click;
             // 
             // buttonRemove
             // 
@@ -113,7 +117,6 @@
             buttonRemove.TabIndex = 15;
             buttonRemove.Text = "Remove";
             buttonRemove.UseVisualStyleBackColor = false;
-           // buttonRemove.Click += buttonRemove_Click;
             // 
             // comboBoxRecipe
             // 
@@ -123,17 +126,64 @@
             comboBoxRecipe.Size = new Size(121, 23);
             comboBoxRecipe.TabIndex = 16;
             // 
+            // textBoxName
+            // 
+            textBoxName.Location = new Point(390, 62);
+            textBoxName.Margin = new Padding(3, 2, 3, 2);
+            textBoxName.Name = "textBoxName";
+            textBoxName.Size = new Size(180, 23);
+            textBoxName.TabIndex = 17;
+            // 
+            // textBoxDescription
+            // 
+            textBoxDescription.Location = new Point(390, 100);
+            textBoxDescription.Margin = new Padding(3, 2, 3, 2);
+            textBoxDescription.Name = "textBoxDescription";
+            textBoxDescription.Size = new Size(180, 23);
+            textBoxDescription.TabIndex = 18;
+            // 
+            // textBoxIngredients
+            // 
+            textBoxIngredients.Location = new Point(390, 141);
+            textBoxIngredients.Margin = new Padding(3, 2, 3, 2);
+            textBoxIngredients.Multiline = true;
+            textBoxIngredients.Name = "textBoxIngredients";
+            textBoxIngredients.Size = new Size(180, 74);
+            textBoxIngredients.TabIndex = 19;
+            // 
+            // textBoxInstructions
+            // 
+            textBoxInstructions.Location = new Point(390, 223);
+            textBoxInstructions.Margin = new Padding(3, 2, 3, 2);
+            textBoxInstructions.Multiline = true;
+            textBoxInstructions.Name = "textBoxInstructions";
+            textBoxInstructions.Size = new Size(180, 79);
+            textBoxInstructions.TabIndex = 20;
+            // 
+            // comboType
+            // 
+            comboType.FormattingEnabled = true;
+            comboType.Location = new Point(390, 28);
+            comboType.Name = "comboType";
+            comboType.Size = new Size(121, 23);
+            comboType.TabIndex = 21;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(624, 325);
+            Controls.Add(comboType);
+            Controls.Add(textBoxInstructions);
+            Controls.Add(textBoxIngredients);
+            Controls.Add(textBoxDescription);
+            Controls.Add(textBoxName);
             Controls.Add(comboBoxRecipe);
             Controls.Add(buttonRemove);
             Controls.Add(buttonCreate);
             Controls.Add(buttonEdit);
             Controls.Add(buttonSearch);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxSearch);
             Controls.Add(buttonAdmin);
             Controls.Add(listBoxRecipe);
             Margin = new Padding(3, 2, 3, 2);
@@ -147,11 +197,16 @@
 
         private ListBox listBoxRecipe;
         private Button buttonAdmin;
-        private TextBox textBox1;
+        private TextBox textBoxSearch;
         private Button buttonSearch;
         private Button buttonEdit;
         private Button buttonCreate;
         private Button buttonRemove;
         private ComboBox comboBoxRecipe;
+        private TextBox textBoxName;
+        private TextBox textBoxDescription;
+        private TextBox textBoxIngredients;
+        private TextBox textBoxInstructions;
+        private ComboBox comboType;
     }
 }

@@ -2,6 +2,7 @@ namespace MatRecept
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -42,14 +43,7 @@ namespace MatRecept
             loginForum.ShowDialog();
         }
 
-      
-        private void comboBoxRecipe_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedCategory = comboBoxRecipe.SelectedItem?.ToString();
-            if (!string.IsNullOrEmpty(selectedCategory))
-            {
-         
-            }
-        }
+
+        
     }
 }
