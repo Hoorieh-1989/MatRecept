@@ -179,8 +179,77 @@ namespace MatRecept
                 listBoxRecipe.DataSource = null;  // clear the box if nothing is in search found
             }
         }
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            // Ensure a recipe is selected 
+            if (listBoxRecipe.SelectedItem is Recipe selectedRecipe)
+            {
+                // Corfirm delete
+                DialogResult result = MessageBox.Show($"Are you sure you want to remove '{selectedRecipe.Name}'?",
+                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+                if (result == DialogResult.Yes)
+                {
+                    // Delete the recipe from the list 
+                    recipes.Remove(selectedRecipe);
+
+                    // Update the file JSON after deleting the recipe
+                    SaveRecipesToFile();
+
+                    // Refresh the ListBox to display updated recipes 
+                    DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
+
+                    MessageBox.Show($"{selectedRecipe.Name} has been removed.", "Recipe Removed");
+
+                    // Select the first recipe after deleting if there are more recipes
+                    if (listBoxRecipe.Items.Count > 0)
+                    {
+                        listBoxRecipe.SelectedIndex = 0; // Select the first  ítem
+                    }
+                    else
+                    {
+                        // Clear the fields if there are no recipes left
+                        ClearRecipeDetails();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a recipe to remove.", "No Selection");
+            }
+        }
+
+        // Method to save updated recipes to JSON file
+        private void SaveRecipesToFile()
+        {
+            try
+            {
+                var recipeCollection = new RecipeCollection { Recipes = recipes };
+                string jsonData = JsonConvert.SerializeObject(recipeCollection, Formatting.Indented);
+
+                // Write to JSON content to the file 
+                File.WriteAllText(filePath, jsonData);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving file: {ex.Message}");
+            }
+        }
+
+        // Method to clear recipe details in the interface 
+        private void ClearRecipeDetails()
+        {
+            textBoxName.Clear();
+            textBoxDescription.Clear();
+            textBoxIngredients.Clear();
+            textBoxInstructions.Clear();
+        }
 
 
     }
+
 }
+
+
+
+
