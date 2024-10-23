@@ -14,15 +14,6 @@ namespace MatRecept
             buttonCreate.Visible = false;
             buttonEdit.Visible = false;
             buttonRemove.Visible = false;
-            comboType.Visible = false;
-            label1.Visible = false;
-            textBoxName.Visible = false;
-            label2.Visible = false;
-            textBoxDescription.Visible = false;
-            label3.Visible = false;
-            textBoxInstructions.Visible = false;
-            label4.Visible = false;
-            textBoxIngredients.Visible = false;
 
             PopulateComboBox();
             LoadRecipes(); // Load recipes from the JSON file
@@ -130,16 +121,7 @@ namespace MatRecept
             buttonCreate.Visible = true;
             buttonEdit.Visible = true;
             buttonRemove.Visible = true;
-            comboType.Visible = true;
-            label1.Visible = true;
-            textBoxName.Visible = true;
-            label2.Visible = true;
-            textBoxDescription.Visible = true;
-            label3.Visible = true;
-            textBoxInstructions.Visible = true;
-            label4.Visible = true;
-            textBoxIngredients.Visible = true;
-
+            
         }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
