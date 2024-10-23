@@ -121,7 +121,7 @@ namespace MatRecept
             buttonCreate.Visible = true;
             buttonEdit.Visible = true;
             buttonRemove.Visible = true;
-            
+
         }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
@@ -147,5 +147,40 @@ namespace MatRecept
         {
             public List<Recipe> Recipes { get; set; }
         }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            // Ta direkt söktexten from textBoxSearch och trimma eventuella extra mellanslag
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            {
+                // Om searrch box is empty show all the categoies we want to choose
+                DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
+                return;
+            }
+
+            // Filtrera recepten  baserat på textBoxSearch.Text utan använda en extra variabel
+            var filteredRecipes = recipes
+                .Where(r => r.Name.ToLower().Contains(textBoxSearch.Text.Trim().ToLower()) ||
+                            r.Ingredients.Any(i => i.ToLower().Contains(textBoxSearch.Text.Trim().ToLower())))
+                .ToList();
+
+            // Kontrollera några matchningar hittades
+            if (filteredRecipes.Count > 0)
+            {
+                // Uppdatera ListBox med  filtrerade resultaten
+                listBoxRecipe.DataSource = null;  // Rensa tidigare data
+                listBoxRecipe.DataSource = filteredRecipes;  // Bind de filtrerade recepten
+                listBoxRecipe.DisplayMember = "Name";  // Visa namnen på recepten
+            }
+            else
+            {
+                // show message box om no match is found
+                MessageBox.Show("No matching recipes found.");
+                listBoxRecipe.DataSource = null;  // clear the box if nothing is in search found
+            }
+        }
+
+
+
     }
 }
