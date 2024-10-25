@@ -221,6 +221,8 @@ namespace MatRecept
             }
         }
 
+
+
         // Method to save updated recipes to JSON file
           private void SaveRecipes()
         {
@@ -262,12 +264,36 @@ namespace MatRecept
                 MessageBox.Show("Recipe updated successfully!");
             }
         }
+        // Method to save updated recipes to JSON file
+        private void SaveRecipesToFile()
+        {
+            try
+            {
+                var recipeCollection = new RecipeCollection { Recipes = recipes };
+                string jsonData = JsonConvert.SerializeObject(recipeCollection, Formatting.Indented);
+
+                // Write to JSON content to the file 
+                File.WriteAllText(filePath, jsonData);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving file: {ex.Message}");
+            }
+        }
+
+        // Method to clear recipe details in the interface 
+        private void ClearRecipeDetails()
+        {
+            textBoxName.Clear();
+            textBoxDescription.Clear();
+            textBoxIngredients.Clear();
+            textBoxInstructions.Clear();
+        }
 
 
     }
 
 }
-
 
 
 
