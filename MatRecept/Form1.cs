@@ -149,7 +149,80 @@ namespace MatRecept
             public List<Recipe> Recipes { get; set; }
         }
 
-        private void SaveRecipes()
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            // Ta direkt söktexten from textBoxSearch och trimma eventuella extra mellanslag
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            {
+                // Om searrch box is empty show all the categoies we want to choose
+                DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
+                return;
+            }
+
+            // Filtrera recepten  baserat på textBoxSearch.Text utan använda en extra variabel
+            var filteredRecipes = recipes
+                .Where(r => r.Name.ToLower().Contains(textBoxSearch.Text.Trim().ToLower()) ||
+                            r.Ingredients.Any(i => i.ToLower().Contains(textBoxSearch.Text.Trim().ToLower())))
+                .ToList();
+
+            // Kontrollera några matchningar hittades
+            if (filteredRecipes.Count > 0)
+            {
+                // Uppdatera ListBox med  filtrerade resultaten
+                listBoxRecipe.DataSource = null;  // Rensa tidigare data
+                listBoxRecipe.DataSource = filteredRecipes;  // Bind de filtrerade recepten
+                listBoxRecipe.DisplayMember = "Name";  // Visa namnen på recepten
+            }
+            else
+            {
+                // show message box om no match is found
+                MessageBox.Show("No matching recipes found.");
+                listBoxRecipe.DataSource = null;  // clear the box if nothing is in search found
+            }
+        }
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            // Ensure a recipe is selected 
+            if (listBoxRecipe.SelectedItem is Recipe selectedRecipe)
+            {
+                // Corfirm delete
+                DialogResult result = MessageBox.Show($"Are you sure you want to remove '{selectedRecipe.Name}'?",
+                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Delete the recipe from the list 
+                    recipes.Remove(selectedRecipe);
+
+                    // Update the file JSON after deleting the recipe
+                    SaveRecipesToFile();
+
+                    // Refresh the ListBox to display updated recipes 
+                    DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
+
+                    MessageBox.Show($"{selectedRecipe.Name} has been removed.", "Recipe Removed");
+
+                    // Select the first recipe after deleting if there are more recipes
+                    if (listBoxRecipe.Items.Count > 0)
+                    {
+                        listBoxRecipe.SelectedIndex = 0; // Select the first  ítem
+                    }
+                    else
+                    {
+                        // Clear the fields if there are no recipes left
+                        ClearRecipeDetails();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a recipe to remove.", "No Selection");
+            }
+        }
+
+        // Method to save updated recipes to JSON file
+          private void SaveRecipes()
         {
             try
             {
@@ -159,7 +232,7 @@ namespace MatRecept
                 // Debug-skrivning
                 Console.WriteLine("JSON Data som ska sparas: " + jsonData);
 
-                File.WriteAllText(filePath, jsonData); // �verskriv filen
+                File.WriteAllText(filePath, jsonData); // Överskriv filen
                 Console.WriteLine("Recepten har sparats till filen.");
             }
             catch (Exception ex)
@@ -190,6 +263,11 @@ namespace MatRecept
             }
         }
 
-       
+
     }
+
 }
+
+
+
+
