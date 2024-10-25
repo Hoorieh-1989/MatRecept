@@ -1,10 +1,11 @@
 using Newtonsoft.Json;
+using System.Diagnostics.Eventing.Reader;
 
 namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        private string filePath = @"Recipe.json"; // Path to your JSON file
+        private string filePath = @"C:\Users\Milto\Source\Repos\MatRecept\MatRecept\Recipe.json"; // Path to your JSON file
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
@@ -148,9 +149,10 @@ namespace MatRecept
             public List<Recipe> Recipes { get; set; }
         }
 
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            // Ta direkt söktexten from textBoxSearch och trimma eventuella extra mellanslag
+            // Ta direkt sÃ¶ktexten from textBoxSearch och trimma eventuella extra mellanslag
             if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
             {
                 // Om searrch box is empty show all the categoies we want to choose
@@ -158,19 +160,19 @@ namespace MatRecept
                 return;
             }
 
-            // Filtrera recepten  baserat på textBoxSearch.Text utan använda en extra variabel
+            // Filtrera recepten  baserat pÃ¥ textBoxSearch.Text utan anvÃ¤nda en extra variabel
             var filteredRecipes = recipes
                 .Where(r => r.Name.ToLower().Contains(textBoxSearch.Text.Trim().ToLower()) ||
                             r.Ingredients.Any(i => i.ToLower().Contains(textBoxSearch.Text.Trim().ToLower())))
                 .ToList();
 
-            // Kontrollera några matchningar hittades
+            // Kontrollera nÃ¥gra matchningar hittades
             if (filteredRecipes.Count > 0)
             {
                 // Uppdatera ListBox med  filtrerade resultaten
                 listBoxRecipe.DataSource = null;  // Rensa tidigare data
                 listBoxRecipe.DataSource = filteredRecipes;  // Bind de filtrerade recepten
-                listBoxRecipe.DisplayMember = "Name";  // Visa namnen på recepten
+                listBoxRecipe.DisplayMember = "Name";  // Visa namnen pÃ¥ recepten
             }
             else
             {
@@ -204,7 +206,7 @@ namespace MatRecept
                     // Select the first recipe after deleting if there are more recipes
                     if (listBoxRecipe.Items.Count > 0)
                     {
-                        listBoxRecipe.SelectedIndex = 0; // Select the first  ítem
+                        listBoxRecipe.SelectedIndex = 0; // Select the first  Ã­tem
                     }
                     else
                     {
@@ -220,29 +222,45 @@ namespace MatRecept
         }
 
         // Method to save updated recipes to JSON file
-        private void SaveRecipesToFile()
+          private void SaveRecipes()
         {
             try
             {
                 var recipeCollection = new RecipeCollection { Recipes = recipes };
                 string jsonData = JsonConvert.SerializeObject(recipeCollection, Formatting.Indented);
 
-                // Write to JSON content to the file 
-                File.WriteAllText(filePath, jsonData);
+                // Debug-skrivning
+                Console.WriteLine("JSON Data som ska sparas: " + jsonData);
+
+                File.WriteAllText(filePath, jsonData); // Ã–verskriv filen
+                Console.WriteLine("Recepten har sparats till filen.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving file: {ex.Message}");
+                MessageBox.Show($"Fel vid sparande av recept: {ex.Message}");
             }
         }
 
-        // Method to clear recipe details in the interface 
-        private void ClearRecipeDetails()
+
+
+
+
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
-            textBoxName.Clear();
-            textBoxDescription.Clear();
-            textBoxIngredients.Clear();
-            textBoxInstructions.Clear();
+
+
+            if (listBoxRecipe.SelectedItem is Recipe selectedRecipe)
+            {
+                // Update the selected recipe's details from the text boxes
+                selectedRecipe.Name = textBoxName.Text;
+                selectedRecipe.Description = textBoxDescription.Text;
+                selectedRecipe.Ingredients = textBoxIngredients.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+                selectedRecipe.Instructions = textBoxInstructions.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+
+                // Save the updated recipes list back to the JSON file
+                SaveRecipes();
+                MessageBox.Show("Recipe updated successfully!");
+            }
         }
 
 
