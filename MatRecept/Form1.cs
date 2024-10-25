@@ -1,10 +1,11 @@
 using Newtonsoft.Json;
+using System.Diagnostics.Eventing.Reader;
 
 namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        private string filePath = @"Recipe.json"; // Path to your JSON file
+        private string filePath = @"C:\Users\Milto\Source\Repos\MatRecept\MatRecept\Recipe.json"; // Path to your JSON file
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
@@ -121,7 +122,7 @@ namespace MatRecept
             buttonCreate.Visible = true;
             buttonEdit.Visible = true;
             buttonRemove.Visible = true;
-            
+
         }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
@@ -147,5 +148,48 @@ namespace MatRecept
         {
             public List<Recipe> Recipes { get; set; }
         }
+
+        private void SaveRecipes()
+        {
+            try
+            {
+                var recipeCollection = new RecipeCollection { Recipes = recipes };
+                string jsonData = JsonConvert.SerializeObject(recipeCollection, Formatting.Indented);
+
+                // Debug-skrivning
+                Console.WriteLine("JSON Data som ska sparas: " + jsonData);
+
+                File.WriteAllText(filePath, jsonData); // Överskriv filen
+                Console.WriteLine("Recepten har sparats till filen.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fel vid sparande av recept: {ex.Message}");
+            }
+        }
+
+
+
+
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+
+
+            if (listBoxRecipe.SelectedItem is Recipe selectedRecipe)
+            {
+                // Update the selected recipe's details from the text boxes
+                selectedRecipe.Name = textBoxName.Text;
+                selectedRecipe.Description = textBoxDescription.Text;
+                selectedRecipe.Ingredients = textBoxIngredients.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+                selectedRecipe.Instructions = textBoxInstructions.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+
+                // Save the updated recipes list back to the JSON file
+                SaveRecipes();
+                MessageBox.Show("Recipe updated successfully!");
+            }
+        }
+
+       
     }
 }
