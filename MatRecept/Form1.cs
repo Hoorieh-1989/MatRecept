@@ -294,15 +294,34 @@ namespace MatRecept
         {
             if (e.KeyCode == Keys.Enter)
             {
-                e.SuppressKeyPress = true; // Prevents the "ding" sound
+               
                 buttonSearch_Click(sender, e); // Trigger the search
             }
         }
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            {
+                DisplayAllRecipes(); // Show all recipes when the search box is empty
+            }
+            else
+            {
+                DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString()); // Filter by selected category
+            }
         }
+
+
+
+        private void DisplayAllRecipes()
+        {
+            listBoxRecipe.DataSource = null; // Clear previous data
+            listBoxRecipe.DataSource = recipes; // Bind all recipes directly
+            listBoxRecipe.DisplayMember = "Name"; // Display the "Name" property of each recipe
+        }
+
+        
+
     }
 
 }
