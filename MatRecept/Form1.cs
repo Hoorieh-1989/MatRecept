@@ -224,7 +224,7 @@ namespace MatRecept
 
 
         // Method to save updated recipes to JSON file
-          private void SaveRecipes()
+        private void SaveRecipes()
         {
             try
             {
@@ -290,7 +290,19 @@ namespace MatRecept
             textBoxInstructions.Clear();
         }
 
+        private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Prevents the "ding" sound
+                buttonSearch_Click(sender, e); // Trigger the search
+            }
+        }
 
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
