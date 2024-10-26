@@ -5,7 +5,7 @@ namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        private string filePath = @"C:\Users\Milto\Source\Repos\MatRecept\MatRecept\Recipe.json"; // Path to your JSON file
+        private string filePath = "Recipe.json";        // Path to your JSON file
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
