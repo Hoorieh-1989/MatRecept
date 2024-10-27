@@ -5,7 +5,7 @@ namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        private string filePath = @"C:\Users\Milto\Source\Repos\MatRecept\MatRecept\Recipe.json"; // Path to your JSON file
+        private string filePath = "Recipe.json";        // Path to your JSON file
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
@@ -224,7 +224,7 @@ namespace MatRecept
 
 
         // Method to save updated recipes to JSON file
-          private void SaveRecipes()
+        private void SaveRecipes()
         {
             try
             {
@@ -290,6 +290,37 @@ namespace MatRecept
             textBoxInstructions.Clear();
         }
 
+        private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+               
+                buttonSearch_Click(sender, e); // Trigger the search
+            }
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            {
+                DisplayAllRecipes(); // Show all recipes when the search box is empty
+            }
+            else
+            {
+                DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString()); // Filter by selected category
+            }
+        }
+
+
+
+        private void DisplayAllRecipes()
+        {
+            listBoxRecipe.DataSource = null; // Clear previous data
+            listBoxRecipe.DataSource = recipes; // Bind all recipes directly
+            listBoxRecipe.DisplayMember = "Name"; // Display the "Name" property of each recipe
+        }
+
+        
 
     }
 
