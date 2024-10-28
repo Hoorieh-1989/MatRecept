@@ -101,6 +101,7 @@
             Controls.Add(buttonSignIn);
             Name = "LoginForum";
             Text = "LoginForum";
+            Load += LoginForum_Load;
             ResumeLayout(false);
             PerformLayout();
         }

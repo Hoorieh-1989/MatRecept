@@ -78,8 +78,7 @@
             textBoxSearch.Size = new Size(180, 23);
             textBoxSearch.TabIndex = 11;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
-            textBoxSearch.KeyDown += textBoxSearch_KeyDown; // This triggers search on Enter key, user can choose to press the button instead
-           
+            textBoxSearch.KeyDown += textBoxSearch_KeyDown;
             // 
             // buttonSearch
             // 
@@ -115,6 +114,7 @@
             buttonCreate.TabIndex = 14;
             buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // buttonRemove
             // 
@@ -248,7 +248,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
-            this.Load += Form1_Load; 
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

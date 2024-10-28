@@ -5,7 +5,8 @@ namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        private string filePath = "Recipe.json";        // Path to your JSON file
+        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
+        // Path to your JSON file
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
@@ -294,7 +295,7 @@ namespace MatRecept
         {
             if (e.KeyCode == Keys.Enter)
             {
-               
+
                 buttonSearch_Click(sender, e); // Trigger the search
             }
         }
@@ -320,9 +321,30 @@ namespace MatRecept
             listBoxRecipe.DisplayMember = "Name"; // Display the "Name" property of each recipe
         }
 
-        
+        private void buttonCreate_Click(object sender, EventArgs e)
+        {
+            var newRecipe = new Recipe
+            {
+                Name = textBoxName.Text,
+                Description = textBoxDescription.Text,
+                Ingredients = textBoxIngredients.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList(),
+                Instructions = textBoxInstructions.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList(),
+                Type = comboType.SelectedItem?.ToString() ?? "General"
+            };
 
+            // Add the new recipe to the list and save to JSON
+            recipes.Add(newRecipe);
+            SaveRecipesToFile();
+
+            // Refresh display and clear inputs
+            DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
+            ClearRecipeDetails();
+
+            MessageBox.Show("Recipe created successfully!");
+        }
     }
+
+
 
 }
 

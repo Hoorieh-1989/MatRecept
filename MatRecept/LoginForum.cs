@@ -42,5 +42,10 @@ namespace MatRecept
         {
             Close();
         }
+
+        private void LoginForum_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
