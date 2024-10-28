@@ -6,7 +6,7 @@ namespace MatRecept
     public partial class Form1 : Form
     {
         private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
-        // Path to your JSON file
+        // Points to the directory where the executable is located (i.e., bin\Debug or bin\Release), so the application can find and update Recipe.json
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
@@ -39,12 +39,15 @@ namespace MatRecept
         {
             if (File.Exists(filePath))
             {
-                string jsonData = ReadFile(filePath); // Read the file using StreamReader
+                string jsonData = File.ReadAllText(filePath); // Changed to use File.ReadAllText instead of an external ReadFile method
 
                 if (!string.IsNullOrEmpty(jsonData))
                 {
                     var recipeCollection = JsonConvert.DeserializeObject<RecipeCollection>(jsonData);
                     recipes = recipeCollection?.Recipes ?? new List<Recipe>(); // Assign the recipes list
+
+                    // Changed to ensure recipes list is initialized even if deserialization fails
+                    recipes = recipeCollection?.Recipes ?? new List<Recipe>();
 
                     // Populate the ListBox with the loaded recipes
                     DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
@@ -58,11 +61,17 @@ namespace MatRecept
                 else
                 {
                     MessageBox.Show("No data found in the recipe file.");
+
+                    // Changed to initialize an empty list if no data is found in JSON
+                    recipes = new List<Recipe>();
                 }
             }
             else
             {
                 MessageBox.Show("Recipe file not found.");
+
+                // Changed to initialize an empty list if the file doesn't exist
+                recipes = new List<Recipe>();
             }
         }
 
