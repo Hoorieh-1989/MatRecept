@@ -233,28 +233,7 @@ namespace MatRecept
 
 
 
-        // Method to save updated recipes to JSON file
-        private void SaveRecipes()
-        {
-            try
-            {
-                var recipeCollection = new RecipeCollection { Recipes = recipes };
-                string jsonData = JsonConvert.SerializeObject(recipeCollection, Formatting.Indented);
-
-                // Debug-skrivning
-                Console.WriteLine("JSON Data som ska sparas: " + jsonData);
-
-                File.WriteAllText(filePath, jsonData); // Överskriv filen
-                Console.WriteLine("Recepten har sparats till filen.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fel vid sparande av recept: {ex.Message}");
-            }
-        }
-
-
-
+      
 
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -270,7 +249,7 @@ namespace MatRecept
                 selectedRecipe.Instructions = textBoxInstructions.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
 
                 // Save the updated recipes list back to the JSON file
-                SaveRecipes();
+                SaveRecipesToFile();
                 MessageBox.Show("Recipe updated successfully!");
             }
         }
