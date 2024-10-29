@@ -3,13 +3,13 @@ using System.Diagnostics.Eventing.Reader;
 
 namespace MatRecept
 {
-    public partial class Form1 : Form
+    public partial class MainUI : Form
     {
-        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
+        private string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
         // Points to the directory where the executable is located (i.e., bin\Debug or bin\Release), so the application can find and update Recipe.json
         private List<Recipe> recipes; // List to hold the recipes
 
-        public Form1()
+        public MainUI()
         {
             InitializeComponent();
 
@@ -37,9 +37,9 @@ namespace MatRecept
 
         private void LoadRecipes()
         {
-            if (File.Exists(filePath))
+            if (File.Exists(_filePath))
             {
-                string jsonData = File.ReadAllText(filePath); // Changed to use File.ReadAllText instead of an external ReadFile method
+                string jsonData = File.ReadAllText(_filePath); // Changed to use File.ReadAllText instead of an external ReadFile method
 
                 if (!string.IsNullOrEmpty(jsonData))
                 {
@@ -141,9 +141,7 @@ namespace MatRecept
             loginForum.ShowDialog();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
+     
 
         public class Recipe
         {
@@ -262,7 +260,7 @@ namespace MatRecept
                 string jsonData = JsonConvert.SerializeObject(recipeCollection, Formatting.Indented);
 
                 // Write to JSON content to the file 
-                File.WriteAllText(filePath, jsonData);
+                File.WriteAllText(_filePath, jsonData);
             }
             catch (Exception ex)
             {

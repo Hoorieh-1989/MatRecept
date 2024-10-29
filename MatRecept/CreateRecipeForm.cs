@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static MatRecept.Form1;
+using static MatRecept.MainUI;
 
 namespace MatRecept
 {
     public partial class CreateRecipeForm : Form
     {
-        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
+        private string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
         // Points to the directory where the executable is located (i.e., bin\Debug or bin\Release), so the application can find and update Recipe.json
         private List<Recipe> recipes; // List to hold the recipes
 
@@ -65,7 +65,7 @@ namespace MatRecept
             }
 
             // Create a new recipe object
-            var newRecipe = new Form1.Recipe
+            var newRecipe = new MainUI.Recipe
             {
                 Name = textBoxName.Text,
                 Description = textBoxDescription.Text,
@@ -75,7 +75,7 @@ namespace MatRecept
             };
 
             // Pass the new recipe back to Form1
-            if (Owner is Form1 mainForm) // Make sure the owner is Form1
+            if (Owner is MainUI mainForm) // Make sure the owner is Form1
             {
                 mainForm.AddRecipe(newRecipe); // Add the recipe to the main list in Form1
                 mainForm.SaveRecipesToFile(); // Call SaveRecipes in Form1 to save the updated list to JSON

@@ -13,9 +13,9 @@ namespace MatRecept
     public partial class LoginForum : Form
     {
 
-        private Form1 mainform;
+        private MainUI mainform;
 
-        public LoginForum(Form1 form1)
+        public LoginForum(MainUI form1)
         {
             InitializeComponent();
             this.mainform = form1;
