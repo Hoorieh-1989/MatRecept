@@ -40,7 +40,6 @@
             textBoxDescription = new TextBox();
             textBoxIngredients = new TextBox();
             textBoxInstructions = new TextBox();
-            comboType = new ComboBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -170,14 +169,6 @@
             textBoxInstructions.Size = new Size(180, 79);
             textBoxInstructions.TabIndex = 20;
             // 
-            // comboType
-            // 
-            comboType.FormattingEnabled = true;
-            comboType.Location = new Point(390, 18);
-            comboType.Name = "comboType";
-            comboType.Size = new Size(121, 23);
-            comboType.TabIndex = 21;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -232,7 +223,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(comboType);
             Controls.Add(textBoxInstructions);
             Controls.Add(textBoxIngredients);
             Controls.Add(textBoxDescription);
@@ -267,7 +257,6 @@
         private TextBox textBoxDescription;
         private TextBox textBoxIngredients;
         private TextBox textBoxInstructions;
-        private ComboBox comboType;
         private Label label1;
         private Label label2;
         private Label label3;
