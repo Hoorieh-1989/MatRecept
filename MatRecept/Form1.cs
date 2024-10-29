@@ -5,7 +5,8 @@ namespace MatRecept
 {
     public partial class Form1 : Form
     {
-        private string filePath = "Recipe.json";        // Path to your JSON file
+        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipe.json");
+        // Points to the directory where the executable is located (i.e., bin\Debug or bin\Release), so the application can find and update Recipe.json
         private List<Recipe> recipes; // List to hold the recipes
 
         public Form1()
@@ -38,12 +39,15 @@ namespace MatRecept
         {
             if (File.Exists(filePath))
             {
-                string jsonData = ReadFile(filePath); // Read the file using StreamReader
+                string jsonData = File.ReadAllText(filePath); // Changed to use File.ReadAllText instead of an external ReadFile method
 
                 if (!string.IsNullOrEmpty(jsonData))
                 {
                     var recipeCollection = JsonConvert.DeserializeObject<RecipeCollection>(jsonData);
                     recipes = recipeCollection?.Recipes ?? new List<Recipe>(); // Assign the recipes list
+
+                    // Changed to ensure recipes list is initialized even if deserialization fails
+                    recipes = recipeCollection?.Recipes ?? new List<Recipe>();
 
                     // Populate the ListBox with the loaded recipes
                     DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
@@ -57,11 +61,17 @@ namespace MatRecept
                 else
                 {
                     MessageBox.Show("No data found in the recipe file.");
+
+                    // Changed to initialize an empty list if no data is found in JSON
+                    recipes = new List<Recipe>();
                 }
             }
             else
             {
                 MessageBox.Show("Recipe file not found.");
+
+                // Changed to initialize an empty list if the file doesn't exist
+                recipes = new List<Recipe>();
             }
         }
 
@@ -294,7 +304,7 @@ namespace MatRecept
         {
             if (e.KeyCode == Keys.Enter)
             {
-               
+
                 buttonSearch_Click(sender, e); // Trigger the search
             }
         }
@@ -320,9 +330,30 @@ namespace MatRecept
             listBoxRecipe.DisplayMember = "Name"; // Display the "Name" property of each recipe
         }
 
-        
+        private void buttonCreate_Click(object sender, EventArgs e)
+        {
+            var newRecipe = new Recipe
+            {
+                Name = textBoxName.Text,
+                Description = textBoxDescription.Text,
+                Ingredients = textBoxIngredients.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList(),
+                Instructions = textBoxInstructions.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList(),
+                Type = comboType.SelectedItem?.ToString() ?? "General"
+            };
 
+            // Add the new recipe to the list and save to JSON
+            recipes.Add(newRecipe);
+            SaveRecipesToFile();
+
+            // Refresh display and clear inputs
+            DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
+            ClearRecipeDetails();
+
+            MessageBox.Show("Recipe created successfully!");
+        }
     }
+
+
 
 }
 
