@@ -254,7 +254,7 @@ namespace MatRecept
             }
         }
         // Method to save updated recipes to JSON file
-        private void SaveRecipesToFile()
+        public void SaveRecipesToFile()
         {
             try
             {
@@ -311,24 +311,16 @@ namespace MatRecept
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            var newRecipe = new Recipe
-            {
-                Name = textBoxName.Text,
-                Description = textBoxDescription.Text,
-                Ingredients = textBoxIngredients.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList(),
-                Instructions = textBoxInstructions.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList(),
-                Type = comboType.SelectedItem?.ToString() ?? "General"
-            };
+            CreateRecipeForm createRecipeForm = new CreateRecipeForm();
+            createRecipeForm.Owner = this; // Set Form1 as the owner to access AddRecipe
+            createRecipeForm.ShowDialog(); // Open CreateRecipeForm as a dialog
+        }
 
-            // Add the new recipe to the list and save to JSON
-            recipes.Add(newRecipe);
-            SaveRecipesToFile();
-
-            // Refresh display and clear inputs
-            DisplayRecipes(comboBoxRecipe.SelectedItem?.ToString());
-            ClearRecipeDetails();
-
-            MessageBox.Show("Recipe created successfully!");
+        public void AddRecipe(Recipe recipe)
+        {
+            recipes.Add(recipe);       // Add the new recipe to the list
+            SaveRecipesToFile();       // Save updated recipes to JSON
+            DisplayAllRecipes();       // Refresh display to show new recipe
         }
     }
 
